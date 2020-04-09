@@ -35,7 +35,7 @@ window.addEventListener("load", function () {
           constraints: {
             width: 640,
             height: 480,
-            facingMode: backCamID || "environment", // or user
+            facingMode: backCamID, // or user
           },
         },
         decoder: {

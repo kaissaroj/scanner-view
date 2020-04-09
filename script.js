@@ -1,34 +1,37 @@
 window.addEventListener("load", function () {
-  try {
-    const dom = document.querySelector("#scanner-container");
-    if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
-      alert("enumerateDevices() not supported.");
-      return;
-    }
-    var backCamID;
+  const dom = document.querySelector("#scanner-container");
+  if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+    alert("enumerateDevices() not supported.");
+    return;
+  }
+  var backCamID;
 
-    navigator.mediaDevices
-      .enumerateDevices()
-      .then(function (devices) {
-        devices.forEach(function (device) {
-          alert(JSON.stringify(device));
-          if (
-            device.kind == "videoinput" &&
-            device.label.match(/back/) != null
-          ) {
-            //alert("Back found!");
-            backCamID = device.deviceId;
-          }
-        });
-      })
-      .catch(function (err) {
-        //alert(err.name + ": " + err.message);
-      });
+  navigator.mediaDevices
+    .enumerateDevices()
+    .then(function (devices) {
+      backCamID = device[devices.length - 1].deviceId;
+      start();
 
-    if (typeof backCamID == "undefined") {
-      alert("back camera not found.");
-    }
+      // devices.forEach(function (device) {
+      //   if (
+      //     device.kind == "videoinput" &&
+      //     device.label.match(/back/) != null
+      //   ) {
+      //     //alert("Back found!");
+      //     backCamID = device.deviceId;
+      //   }
+      // });
+    })
+    .catch(function (err) {
+      //alert(err.name + ": " + err.message);
+    });
 
+  if (typeof backCamID == "undefined") {
+    alert("back camera not found.");
+  }
+
+  function start() {
+    alert(backCamID);
     Quagga.init(
       {
         inputStream: {
@@ -68,7 +71,5 @@ window.addEventListener("load", function () {
       const code = result.codeResult.code;
       alert(code);
     });
-  } catch (e) {
-    alert(JSON.stringify(e));
   }
 });

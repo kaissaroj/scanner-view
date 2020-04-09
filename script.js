@@ -31,8 +31,9 @@ Quagga.init(
   },
   function (err) {
     if (err) {
-      return console.log(err);
+      alert(JSON.stringify(err));
     }
+    alert("start scanning");
     console.log("starting scanning");
     Quagga.start();
   }
@@ -42,16 +43,4 @@ Quagga.onDetected(function (result) {
   console.log(result.codeResult.code);
   const code = result.codeResult.code;
   alert(code);
-});
-var resultCollector = Quagga.ResultCollector.create({
-  capture: true, // keep track of the image producing this result
-  capacity: 20, // maximum number of results to store
-  blacklist: [],
-  filter: function (codeResult) {
-    // alert(codeResult.format);
-    // only store results which match this constraint
-    // returns true/false
-    // e.g.: return codeResult.format === "ean_13";
-    return true;
-  },
 });

@@ -1,4 +1,6 @@
-window.addEventListener("load", function () {
+/**Quagga initialiser starts here*/
+
+$(function () {
   var value;
   var App = {
     init: function () {

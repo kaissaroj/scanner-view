@@ -5,11 +5,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Scanner</title>
+    <script src="./jquery.min.js"></script>
     <script src="./quagga.min.js"></script>
   </head>
   <body>
     <section id="container" class="container">
       <h3>The user's camera</h3>
+      <p>
+        If your platform supports the <strong>getUserMedia</strong> API call,
+        you can try the real-time locating and decoding features. Simply allow
+        the page to access your web-cam and point it to a barcode.
+      </p>
+      <p>
+        The various options available allow you to adjust the decoding process
+        to your needs (Type of barcode, resolution, ...)
+      </p>
       <div class="controls">
         <fieldset class="input-group">
           <button class="stop">Stop</button>
@@ -27,18 +37,6 @@
       </div>
       <div id="interactive" class="viewport"></div>
     </section>
-    <div
-      id="scanner-container"
-      style="
-        width: 672px;
-
-        height: 512px;
-
-        background-color: blue;
-      "
-    ></div>
-    <span>Camera</span>
-    <!-- <script src="./script.js"></script> -->
     <script src="./script2.js"></script>
   </body>
 </html>

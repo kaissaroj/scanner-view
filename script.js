@@ -29,12 +29,33 @@ window.addEventListener("load", function () {
           ],
         },
       },
+      initCameraSelection: function(){
+        var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
+
+        return Quagga.CameraAccess.enumerateVideoDevices()
+        .then(function(devices) {
+            function pruneText(text) {
+                return text.length > 30 ? text.substr(0, 30) : text;
+            }
+            var $deviceSelection = document.getElementById("deviceSelection");
+            while ($deviceSelection.firstChild) {
+                $deviceSelection.removeChild($deviceSelection.firstChild);
+            }
+            devices.forEach(function(device) {
+                var $option = document.createElement("option");
+                $option.value = device.deviceId || device.id;
+                $option.appendChild(document.createTextNode(pruneText(device.label || device.deviceId || device.id)));
+                $option.selected = streamLabel === device.label;
+                $deviceSelection.appendChild($option);
+            });
+        });
+    },
       function (err) {
         alert(JSON.stringify(err));
         console.log("starting scanning");
         Quagga.start();
       }
-    );
+    )
 
     Quagga.onDetected(function (result) {
       console.log(result.codeResult.code);

@@ -1,7 +1,30 @@
 window.addEventListener("load", function () {
   try {
     const dom = document.querySelector("#scanner-container");
-    alert(!!dom);
+    if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+      alert("enumerateDevices() not supported.");
+      return;
+    }
+    var backCamID;
+    
+    navigator.mediaDevices.enumerateDevices()
+    .then(function(devices) {
+      devices.forEach(function(device) {
+        alert( JSON.stringify(device) );
+        if( device.kind == "videoinput" && device.label.match(/back/) != null ){
+          //alert("Back found!");
+          backCamID = device.deviceId;
+        }
+      });
+    })
+    .catch(function(err) {
+      //alert(err.name + ": " + err.message);
+    });
+    
+    if(typeof(backCamID)=="undefined"){
+      alert("back camera not found.");
+    }
+    
     Quagga.init(
       {
         inputStream: {
@@ -12,7 +35,7 @@ window.addEventListener("load", function () {
           constraints: {
             width: 640,
             height: 480,
-            facingMode: "environment", // or user
+            facingMode: backCamID || "environment", // or user
           },
         },
         decoder: {

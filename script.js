@@ -28,10 +28,7 @@ window.addEventListener("load", function () {
       },
     },
     function (err) {
-      if (err) {
-        alert(JSON.stringify(err));
-      }
-      alert("start scanning");
+      alert(JSON.stringify(err));
       console.log("starting scanning");
       Quagga.start();
     }

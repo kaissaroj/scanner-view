@@ -9,34 +9,16 @@
     <script src="./quagga.min.js"></script>
   </head>
   <body>
-    <section id="container" class="container">
-      <h3>The user's camera</h3>
-      <p>
-        If your platform supports the <strong>getUserMedia</strong> API call,
-        you can try the real-time locating and decoding features. Simply allow
-        the page to access your web-cam and point it to a barcode.
-      </p>
-      <p>
-        The various options available allow you to adjust the decoding process
-        to your needs (Type of barcode, resolution, ...)
-      </p>
-      <div class="controls">
-        <fieldset class="input-group">
-          <button class="stop">Stop</button>
-        </fieldset>
-        <fieldset class="reader-config-group">
-          <label>
-            <span>Camera</span>
-            <select name="input-stream_constraints" id="deviceSelection">
-            </select>
-          </label>
-        </fieldset>
-      </div>
-      <div id="result_strip">
-        <ul class="thumbnails"></ul>
-      </div>
-      <div id="interactive" class="viewport"></div>
-    </section>
-    <script src="./script2.js"></script>
+    <div
+      id="scanner-container"
+      style="
+        width: 672px;
+
+        height: 512px;
+
+        background-color: blue;
+      "
+    ></div>
+    <script src="./script.js"></script>
   </body>
 </html>

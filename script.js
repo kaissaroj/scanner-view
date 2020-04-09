@@ -9,7 +9,7 @@ window.addEventListener("load", function () {
   navigator.mediaDevices
     .enumerateDevices()
     .then(function (devices) {
-      backCamID = device[devices.length - 1].deviceId;
+      backCamID = devices[devices.length - 1].deviceId;
       start();
 
       // devices.forEach(function (device) {

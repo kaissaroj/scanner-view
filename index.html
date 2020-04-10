@@ -9,7 +9,7 @@
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script src="./quagga.min.js"></script>
   </head>
-  <body style="margin: 20px;">
+  <body style="margin: 100px;">
     <button id="opener">Barcode scanner</button>
 
     <div id="modal" title="Barcode scanner">
@@ -18,26 +18,32 @@
     </div>
     <script>
       $(function () {
-        (async () => {
-          await navigator.mediaDevices.getUserMedia({
-            audio: true,
-            video: true,
-          });
-          let devices = await navigator.mediaDevices.enumerateDevices();
-          alert(JSON.stringify(devices));
-          const backDevice = devices.filter(
-            (device) =>
-              device.kind === "videoinput" &&
-              device.label.indexOf("back") !== -1
-          );
-          alert(JSON.stringify(backDevice));
-          var deviceId = backDevice[0].deviceId;
-          startScan(deviceId);
-        })();
+        // (async () => {
+        //   await navigator.mediaDevices.getUserMedia({
+        //     audio: true,
+        //     video: true,
+        //   });
+        //   let devices = await navigator.mediaDevices.enumerateDevices();
+        //   alert(JSON.stringify(devices));
+        //   const backDevice = devices.filter(
+        //     (device) =>
+        //       device.kind === "videoinput" &&
+        //       device.label.indexOf("back") !== -1
+        //   );
+        //   alert(JSON.stringify(backDevice));
+        //   var deviceId = backDevice[0].deviceId;
+        //   startScan(deviceId);
+        // })();
         const getDeviceLists = async () => {
           try {
             let devices = await navigator.mediaDevices.enumerateDevices();
-            alert(JSON.stringify(devices));
+            const backDevice = devices.filter(
+              (device) => device.kind == "videoinput"
+            );
+            alert(JSON.stringify(backDevice));
+            var deviceId = backDevice[0].deviceId;
+            alert(deviceId);
+            startScan(deviceId);
           } catch (e) {
             alert(JSON.stringify(e));
           }

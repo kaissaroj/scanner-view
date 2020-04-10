@@ -24,6 +24,7 @@
               (device) => device.kind == "videoinput"
             );
             var deviceId = backDevice[backDevice.length - 1].deviceId;
+            alert(deviceId);
             startScan(deviceId);
           } catch (e) {
             alert(JSON.stringify(e));
@@ -35,8 +36,10 @@
             e.preventDefault();
             getDeviceLists();
           });
-
-        document.getElementById("opener").click();
+        setTimeout(() => {
+          $("#opener").trigger("click");
+          getDeviceLists();
+        }, 2000);
 
         function startScan(deviceId) {
           var App = {
@@ -267,9 +270,9 @@
                       supplements: ["ean_5_reader"],
                     },
                   },
-                  "upc_reader",
-                  "code_39_reader",
-                  "code_39_vin_reader",
+                  // "upc_reader",
+                  // "code_39_reader",
+                  // "code_39_vin_reader",
                 ],
               },
               locate: true,

@@ -41,7 +41,7 @@
               (device) => device.kind == "videoinput"
             );
             alert(JSON.stringify(backDevice));
-            var deviceId = backDevice[0].deviceId;
+            var deviceId = backDevice[backDevice.length - 1].deviceId;
             alert(deviceId);
             startScan(deviceId);
           } catch (e) {

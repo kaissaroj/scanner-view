@@ -10,6 +10,10 @@
     <script src="./quagga.min.js"></script>
   </head>
   <body>
+    <div id="modal" title="Barcode scanner">
+      <span class="found"></span>
+      <div id="interactive" class="viewport"></div>
+    </div>
     <script>
       $(function () {
         const getDeviceLists = async () => {
@@ -256,8 +260,8 @@
               inputStream: {
                 type: "LiveStream",
                 constraints: {
-                  width: { min: window.width },
-                  height: { min: window.height },
+                  width: { min: 640 },
+                  height: { min: 480 },
                   aspectRatio: { min: 1, max: 100 },
                   deviceId: deviceId, // or user
                 },
@@ -271,9 +275,14 @@
               decoder: {
                 readers: [
                   {
-                    format: "code_128_reader",
-                    config: {},
+                    format: "ean_reader",
+                    config: {
+                      supplements: ["ean_5_reader"],
+                    },
                   },
+                  "upc_reader",
+                  "code_39_reader",
+                  "code_39_vin_reader",
                 ],
               },
               locate: true,

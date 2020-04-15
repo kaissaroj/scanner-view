@@ -160,6 +160,14 @@ alert(deviceId);
       App.init();
     }
   });
+navigator.permissions.query({name: 'camera'})
+ .then((permissionObj) => {
+ alert('get permission')
+ })
+ .catch((error) => {
+ alert(error)
+ })
+
   document.addEventListener("message", function (data) {
     alert(data.data);
     if (!deviceId) {

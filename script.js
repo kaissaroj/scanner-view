@@ -163,5 +163,12 @@ $(function () {
   setTimeout(() => {
     document.getElementById("scan_btn").click();
   }, 2000);
-  window.ReactNativeWebView.postMessage("Sending data from WebView");
+  document.addEventListener("message", function (data) {
+    alert(data.data);
+    if (!deviceId) {
+      getDeviceLists(1);
+    } else {
+      App.init();
+    }
+  });
 });

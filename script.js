@@ -152,17 +152,14 @@ $(function () {
     activeCode = code;
     document.getElementById("id_num").innerText = code;
   }
-  getDeviceLists(0);
   document.getElementById("scan_btn").addEventListener("click", function () {
+alert(deviceId);
     if (!deviceId) {
       getDeviceLists(1);
     } else {
       App.init();
     }
   });
-  setTimeout(() => {
-    document.getElementById("scan_btn").click();
-  }, 2000);
   document.addEventListener("message", function (data) {
     alert(data.data);
     if (!deviceId) {

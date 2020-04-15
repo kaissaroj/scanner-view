@@ -145,7 +145,7 @@ $(function () {
   };
   function codeReceived(code) {
     try {
-      window.postMessage(code);
+      window.ReactNativeWebView.postMessage(code);
     } catch (e) {
       alert(e);
     }
@@ -160,6 +160,8 @@ $(function () {
       App.init();
     }
   });
-  document.getElementById("scan_btn").click();
-  window.postMessage("Sending data from WebView");
+  setTimeout(() => {
+    document.getElementById("scan_btn").click();
+  }, 2000);
+  window.ReactNativeWebView.postMessage("Sending data from WebView");
 });

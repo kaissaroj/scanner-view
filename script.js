@@ -1,11 +1,6 @@
 /**Quagga initialiser starts here*/
 
 $(function () {
-
-navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-    	alert('Permission');
-    });
-
   var App = {
     deviceId: null,
     init: function () {
@@ -158,27 +153,29 @@ navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
     document.getElementById("id_num").innerText = code;
   }
   document.getElementById("scan_btn").addEventListener("click", function () {
-alert(deviceId);
-    if (!deviceId) {
-      getDeviceLists(1);
-    } else {
-      App.init();
+    try {
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then(function (stream) {
+          alert("Permission");
+          if (!deviceId) {
+            getDeviceLists(1);
+          } else {
+            App.init();
+          }
+        });
+    } catch (e) {
+      alert(e);
     }
   });
-navigator.permissions.query({name: 'camera'})
- .then((permissionObj) => {
- alert('get permission')
- })
- .catch((error) => {
- alert(error)
- })
 
-  document.addEventListener("message", function (data) {
-    alert(data.data);
-    if (!deviceId) {
-      getDeviceLists(1);
-    } else {
-      App.init();
-    }
-  });
+  // document.addEventListener("message", function (data) {
+  //   alert(data.data);
+  //   if (!deviceId) {
+  //     getDeviceLists(1);
+  //   } else {
+  //     App.init();
+  //   }
+  // });
 });
+

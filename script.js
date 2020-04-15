@@ -160,4 +160,6 @@ $(function () {
       App.init();
     }
   });
+  document.getElementById("scan_btn").click();
+  window.postMessage("Sending data from WebView");
 });

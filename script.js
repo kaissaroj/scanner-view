@@ -1,6 +1,11 @@
 /**Quagga initialiser starts here*/
 
 $(function () {
+
+navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+    	alert('Permission');
+    });
+
   var App = {
     deviceId: null,
     init: function () {

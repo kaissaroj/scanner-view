@@ -133,6 +133,7 @@ $(function () {
   const getDeviceLists = async (toStart) => {
     try {
       let devices = await navigator.mediaDevices.enumerateDevices();
+      alert(JSON.stringify(devices));
       const backDevice = devices.filter(
         (device) => device.kind == "videoinput"
       );
@@ -153,19 +154,11 @@ $(function () {
     document.getElementById("id_num").innerText = code;
   }
   document.getElementById("scan_btn").addEventListener("click", function () {
-    try {
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then(function (stream) {
-          alert("Permission");
-          if (!deviceId) {
-            getDeviceLists(1);
-          } else {
-            App.init();
-          }
-        });
-    } catch (e) {
-      alert(e);
+    alert("Permission");
+    if (!deviceId) {
+      getDeviceLists(1);
+    } else {
+      App.init();
     }
   });
 

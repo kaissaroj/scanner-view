@@ -144,6 +144,11 @@ $(function () {
     }
   };
   function codeReceived(code) {
+    try {
+      window.postMessage(code);
+    } catch (e) {
+      alert(e);
+    }
     activeCode = code;
     document.getElementById("id_num").innerText = code;
   }

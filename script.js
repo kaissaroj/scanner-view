@@ -143,8 +143,8 @@ $(function () {
       toStart == 1 && App.init();
     },
     codeReceived: (code) => {
-      if (!this._checking) {
-        this._checking = true;
+      if (!this._checkingCode) {
+        this._checkingCode = true;
         this.activeCode = code;
         // alert(code);
         try {
@@ -165,8 +165,7 @@ $(function () {
   document.addEventListener(
     "message",
     function (event) {
-      // window.ReactNativeWebView.postMessage(event.data);
-      alert(JSON.stringify(event));
+      Handler._checkingCode = false;
     },
     false
   );

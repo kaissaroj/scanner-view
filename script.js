@@ -162,12 +162,21 @@ $(function () {
     }
   });
 
-  document.addEventListener("message", function (data) {
-    alert(JSON.stringify(data));
-    if (!deviceId) {
-      Handler.getDeviceLists(1);
-    } else {
-      App.init();
-    }
-  });
+  document.addEventListener(
+    "message",
+    function (event) {
+      // window.ReactNativeWebView.postMessage(event.data);
+      alert(JSON.stringify(event));
+    },
+    false
+  );
+
+  // document.addEventListener("message", function (data) {
+  //   alert(JSON.stringify(data));
+  //   if (!deviceId) {
+  //     Handler.getDeviceLists(1);
+  //   } else {
+  //     App.init();
+  //   }
+  // });
 });

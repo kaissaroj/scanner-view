@@ -92,9 +92,9 @@ $(function () {
       inputStream: {
         type: "LiveStream",
         constraints: {
-          width: window.innerWidth,
-          height: window.innerHeight,
-          aspectRatio: { min: 1, max: 100 },
+          // width: window.innerWidth,
+          // height: window.innerHeight,
+          // aspectRatio: { min: 1, max: 100 },
           facingMode: "environment", // or user
           deviceId: this.deviceId,
         },
@@ -133,7 +133,7 @@ $(function () {
   const getDeviceLists = async (toStart) => {
     try {
       let devices = await navigator.mediaDevices.enumerateDevices();
-      alert(JSON.stringify(devices));
+      // alert(JSON.stringify(devices));
       const backDevice = devices.filter(
         (device) => device.kind == "videoinput"
       );
@@ -153,22 +153,22 @@ $(function () {
     activeCode = code;
     document.getElementById("id_num").innerText = code;
   }
-  document.getElementById("scan_btn").addEventListener("click", function () {
-    alert("Permission");
-    if (!deviceId) {
-      getDeviceLists(1);
-    } else {
-      App.init();
-    }
-  });
-
-  // document.addEventListener("message", function (data) {
-  //   alert(data.data);
+  // document.getElementById("scan_btn").addEventListener("click", function () {
+  //   alert("Permission");
   //   if (!deviceId) {
   //     getDeviceLists(1);
   //   } else {
   //     App.init();
   //   }
   // });
-});
 
+  document.addEventListener("message", function (data) {
+    alert(data.data);
+    if (!deviceId) {
+      getDeviceLists(1);
+    } else {
+      App.init();
+    }
+  });
+  getDeviceLists(1);
+});

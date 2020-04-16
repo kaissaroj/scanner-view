@@ -124,47 +124,48 @@ $(function () {
 
   Quagga.onDetected(function (result) {
     var code = result.codeResult.code;
-    if (activeCode !== code) {
-      codeReceived(code);
+    if (Handler.activeCode !== code) {
+      Handler.codeReceived(code);
     }
   });
-  var activeCode = null;
-  var deviceId = null;
-  const getDeviceLists = async (toStart) => {
-    try {
+
+  var Handler = {
+    activeCode: null,
+    deviceId: null,
+    _checkingCode: false,
+    getDeviceLists: async (toStart) => {
       let devices = await navigator.mediaDevices.enumerateDevices();
-      // alert(JSON.stringify(devices));
       const backDevice = devices.filter(
         (device) => device.kind == "videoinput"
       );
-      deviceId = backDevice[backDevice.length - 1].deviceId;
-      App.deviceId = deviceId;
+      this.deviceId = backDevice[backDevice.length - 1].deviceId;
+      App.deviceId = this.deviceId;
       toStart == 1 && App.init();
-    } catch (e) {
-      alert(JSON.stringify(e));
-    }
+    },
+    codeReceived: (code) => {
+      if (!this._checking) {
+        this._checking = true;
+        this.activeCode = code;
+        // alert(code);
+        try {
+          window.ReactNativeWebView.postMessage(code);
+        } catch (e) {}
+      }
+    },
   };
-  function codeReceived(code) {
-    try {
-      window.ReactNativeWebView.postMessage(code);
-    } catch (e) {
-      alert(e);
-    }
-    activeCode = code;
-    document.getElementById("id_num").innerText = code;
-  }
+
   document.getElementById("scan_btn").addEventListener("click", function () {
-    if (!deviceId) {
-      getDeviceLists(1);
+    if (!Handler.deviceId) {
+      Handler.getDeviceLists(1);
     } else {
       App.init();
     }
   });
 
   document.addEventListener("message", function (data) {
-    alert(data.data);
+    alert(JSON.stringify(data));
     if (!deviceId) {
-      getDeviceLists(1);
+      Handler.getDeviceLists(1);
     } else {
       App.init();
     }

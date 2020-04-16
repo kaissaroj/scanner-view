@@ -113,6 +113,7 @@ $(function () {
             },
           },
           "upc_reader",
+          "code_128_reader",
         ],
       },
       locate: true,
@@ -142,6 +143,12 @@ $(function () {
         : Handler._isScanning
         ? `SCANNING`
         : `SCAN BARCODE`;
+
+      document.getElementById("interactive").style.display =
+        !Handler._checkingCode && !Handler._isScanning ? "none" : "block";
+      if (!Handler._checkingCode && !Handler._isScanning) {
+        App.stop();
+      }
     },
     getDeviceLists: async (toStart) => {
       let devices = await navigator.mediaDevices.enumerateDevices();
@@ -154,9 +161,10 @@ $(function () {
     },
     codeReceived: (code) => {
       if (!Handler._checkingCode) {
-        Handler._checkingCode = false;
+        Handler._checkingCode = true;
         Handler.activeCode = code;
         Handler.changeButtonText();
+        document.getElementById("found_code").innerText = code;
         try {
           window.ReactNativeWebView.postMessage(code);
         } catch (e) {}
@@ -165,17 +173,19 @@ $(function () {
   };
 
   document.getElementById("scan_btn").addEventListener("click", function () {
-    if (Handler._isScanning == false) {
-      if (!Handler.deviceId) {
-        Handler.getDeviceLists(1);
+    if (!Handler._checkingCode) {
+      if (Handler._isScanning == false) {
+        if (!Handler.deviceId) {
+          Handler.getDeviceLists(1);
+        } else {
+          App.init();
+        }
+        Handler._isScanning = true;
       } else {
-        App.init();
+        Handler._isScanning = false;
       }
-      Handler._isScanning = true;
-    } else {
-      Handler._isScanning = false;
+      Handler.changeButtonText();
     }
-    Handler.changeButtonText();
   });
 
   document.addEventListener("message", function (data) {

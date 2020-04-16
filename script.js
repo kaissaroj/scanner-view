@@ -139,7 +139,6 @@ $(function () {
       );
       deviceId = backDevice[backDevice.length - 1].deviceId;
       App.deviceId = deviceId;
-      alert(deviceId);
       toStart == 1 && App.init();
     } catch (e) {
       alert(JSON.stringify(e));
@@ -154,14 +153,13 @@ $(function () {
     activeCode = code;
     document.getElementById("id_num").innerText = code;
   }
-  // document.getElementById("scan_btn").addEventListener("click", function () {
-  //   alert("Permission");
-  //   if (!deviceId) {
-  //     getDeviceLists(1);
-  //   } else {
-  //     App.init();
-  //   }
-  // });
+  document.getElementById("scan_btn").addEventListener("click", function () {
+    if (!deviceId) {
+      getDeviceLists(1);
+    } else {
+      App.init();
+    }
+  });
 
   document.addEventListener("message", function (data) {
     alert(data.data);
@@ -171,5 +169,4 @@ $(function () {
       App.init();
     }
   });
-  getDeviceLists(1);
 });

@@ -5,17 +5,75 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Scanner</title>
-    <script src="./jquery.min.js"></script>
-    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-    <script src="./quagga.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
   </head>
+  <style>
+    body {
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
+    button {
+      width: 100%;
+      color: white;
+      background-color: blueviolet;
+      margin: 0;
+      height: 55px !important;
+      font-size: 20px;
+      font-weight: bolder;
+
+      display: block;
+      /* width: 100%;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      flex: 0 0 auto; */
+    }
+
+    #interactive.viewport {
+      position: relative;
+    }
+
+    #interactive.viewport > canvas,
+    #interactive.viewport > video {
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .controls:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    @media (max-width: 603px) {
+      /* line 2, ../sass/phone/_core.scss */
+      #container {
+        margin: 10px auto;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+    }
+    @media (max-width: 603px) {
+      /* line 5, ../sass/phone/_viewport.scss */
+      #interactive.viewport {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+      }
+    }
+  </style>
   <body>
-    <!-- <section style="padding-top: 25px;">
-      <p>Scan ID : <strong id="id_num"></strong></p>
-      <button id="scan_btn">SCAN</button>
+    <section id="container" class="container">
+      <div class="controls">
+        <div class="input-group">
+          <button id="scan_btn">SCAN BARCODE</button>
+        </div>
+      </div>
       <div id="interactive" class="viewport"></div>
-    </section> -->
-    <div id="interactive" class="viewport" style="height: 100%;"></div>
+    </section>
+
     <script src="./script.js"></script>
   </body>
 </html>

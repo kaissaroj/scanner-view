@@ -132,21 +132,32 @@ $(function () {
   var Handler = {
     activeCode: null,
     deviceId: null,
+    _isScanning: false,
     _checkingCode: false,
+    changeButtonText: () => {
+      const btn = document.getElementById("scan_btn");
+      console.log(Handler._isScanning);
+      if (Handler._checkingCode) {
+        btn.innerText = "VERIFYING";
+      } else if (Handler._isScanning) btn.innerText = "SCANNING";
+      else {
+        btn.innerText = "SCAN BARCODE";
+      }
+    },
     getDeviceLists: async (toStart) => {
       let devices = await navigator.mediaDevices.enumerateDevices();
       const backDevice = devices.filter(
         (device) => device.kind == "videoinput"
       );
-      this.deviceId = backDevice[backDevice.length - 1].deviceId;
-      App.deviceId = this.deviceId;
+      Handler.deviceId = backDevice[backDevice.length - 1].deviceId;
+      App.deviceId = Handler.deviceId;
       toStart == 1 && App.init();
     },
     codeReceived: (code) => {
-      if (!this._checkingCode) {
-        this._checkingCode = true;
-        this.activeCode = code;
-        // alert(code);
+      if (!Handler._checking) {
+        Handler._checking = true;
+        Handler.activeCode = code;
+        Handler.changeButtonText();
         try {
           window.ReactNativeWebView.postMessage(code);
         } catch (e) {}
@@ -155,27 +166,21 @@ $(function () {
   };
 
   document.getElementById("scan_btn").addEventListener("click", function () {
-    if (!Handler.deviceId) {
-      Handler.getDeviceLists(1);
+    if (Handler._isScanning == false) {
+      if (!Handler.deviceId) {
+        Handler.getDeviceLists(1);
+      } else {
+        App.init();
+      }
+      Handler._isScanning = true;
     } else {
-      App.init();
+      Handler._isScanning = false;
     }
+    Handler.changeButtonText();
   });
 
-  document.addEventListener(
-    "message",
-    function (event) {
-      Handler._checkingCode = false;
-    },
-    false
-  );
-
-  // document.addEventListener("message", function (data) {
-  //   alert(JSON.stringify(data));
-  //   if (!deviceId) {
-  //     Handler.getDeviceLists(1);
-  //   } else {
-  //     App.init();
-  //   }
-  // });
+  document.addEventListener("message", function (data) {
+    Handler._checkingCode = false;
+    Handler.changeButtonText();
+  });
 });

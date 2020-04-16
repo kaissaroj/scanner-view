@@ -137,12 +137,11 @@ $(function () {
     changeButtonText: () => {
       const btn = document.getElementById("scan_btn");
       console.log(Handler._isScanning);
-      if (Handler._checkingCode) {
-        btn.innerText = "VERIFYING";
-      } else if (Handler._isScanning) btn.innerText = "SCANNING";
-      else {
-        btn.innerText = "SCAN BARCODE";
-      }
+      btn.innerText = Handler._checkingCode
+        ? `VERIFYING`
+        : Handler._isScanning
+        ? `SCANNING`
+        : `SCAN BARCODE`;
     },
     getDeviceLists: async (toStart) => {
       let devices = await navigator.mediaDevices.enumerateDevices();
@@ -154,8 +153,8 @@ $(function () {
       toStart == 1 && App.init();
     },
     codeReceived: (code) => {
-      if (!Handler._checking) {
-        Handler._checking = true;
+      if (!Handler._checkingCode) {
+        Handler._checkingCode = false;
         Handler.activeCode = code;
         Handler.changeButtonText();
         try {

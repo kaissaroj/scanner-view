@@ -183,4 +183,7 @@ $(function () {
     Handler._checkingCode = false;
     Handler.changeButtonText();
   });
+  setTimeout(() => {
+    document.getElementById("scan_btn").click();
+  }, 1000);
 });

@@ -139,6 +139,7 @@ $(function () {
       );
       deviceId = backDevice[backDevice.length - 1].deviceId;
       App.deviceId = deviceId;
+      alert(deviceId);
       toStart == 1 && App.init();
     } catch (e) {
       alert(JSON.stringify(e));

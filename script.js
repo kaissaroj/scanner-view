@@ -163,6 +163,8 @@ $(function () {
       } catch (e) {
         alert(JSON.stringify(e));
         window.ReactNativeWebView.postMessage(e);
+        App.deviceId = null;
+        toStart == 1 && App.init();
       }
     },
     codeReceived: (code) => {
@@ -198,16 +200,4 @@ $(function () {
     Handler._checkingCode = false;
     Handler.changeButtonText();
   });
-
-  const test = async () => {
-    alert(!!navigator.mediaDevices);
-    // try {
-    //   await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
-    //   let devices = await navigator.mediaDevices.enumerateDevices();
-    //   alert(JSON.stringify(devices));
-    // } catch (e) {
-    //   window.ReactNativeWebView.postMessage(e);
-    // }
-  };
-  test();
 });

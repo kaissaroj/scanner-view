@@ -200,7 +200,7 @@ $(function () {
   });
 
   const test = async () => {
-    alert(!!navigator);
+    alert(!!navigator.mediaDevices);
     // try {
     //   await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
     //   let devices = await navigator.mediaDevices.enumerateDevices();

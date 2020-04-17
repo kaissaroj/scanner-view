@@ -204,4 +204,12 @@ $(function () {
     alert("enumerateDevices() not supported.");
     return;
   }
+  (async () => {
+    try {
+      const devices = await Quagga.CameraAccess.enumerateVideoDevices();
+      alert(JSON.stringify(devices));
+    } catch (e) {
+      alert(JSON.stringify(e));
+    }
+  })();
 });

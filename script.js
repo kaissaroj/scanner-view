@@ -151,13 +151,18 @@ $(function () {
       }
     },
     getDeviceLists: async (toStart) => {
-      let devices = await navigator.mediaDevices.enumerateDevices();
-      const backDevice = devices.filter(
-        (device) => device.kind == "videoinput"
-      );
-      Handler.deviceId = backDevice[backDevice.length - 1].deviceId;
-      App.deviceId = Handler.deviceId;
-      toStart == 1 && App.init();
+      try {
+        let devices = await navigator.mediaDevices.enumerateDevices();
+        const backDevice = devices.filter(
+          (device) => device.kind == "videoinput"
+        );
+        alert(JSON.stringify(devices));
+        Handler.deviceId = backDevice[backDevice.length - 1].deviceId;
+        App.deviceId = Handler.deviceId;
+        toStart == 1 && App.init();
+      } catch (e) {
+        alert(JSON.stringify(e));
+      }
     },
     codeReceived: (code) => {
       if (!Handler._checkingCode) {

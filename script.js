@@ -94,7 +94,7 @@ $(function () {
         constraints: {
           // width: window.innerWidth,
           // height: window.innerHeight,
-          // aspectRatio: { min: 1, max: 100 },
+          aspectRatio: { min: 1, max: 100 },
           facingMode: "environment", // or user
           deviceId: this.deviceId,
         },

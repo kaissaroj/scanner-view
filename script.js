@@ -95,7 +95,7 @@ $(function () {
           // width: window.innerWidth,
           // height: window.innerHeight,
           aspectRatio: { min: 1, max: 100 },
-          facingMode: { exact: "environment" },
+          facingMode: "environment",
           // deviceId: this.deviceId,
         },
       },

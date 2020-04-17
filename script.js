@@ -95,8 +95,8 @@ $(function () {
           // width: window.innerWidth,
           // height: window.innerHeight,
           aspectRatio: { min: 1, max: 100 },
-          facingMode: "environment", // or user
-          deviceId: this.deviceId,
+          facingMode: { exact: "environment" },
+          // deviceId: this.deviceId,
         },
       },
       locator: {
@@ -161,8 +161,8 @@ $(function () {
         App.deviceId = Handler.deviceId;
         toStart == 1 && App.init();
       } catch (e) {
-        alert(JSON.stringify(e));
-        window.ReactNativeWebView.postMessage(e);
+        // alert(JSON.stringify(e));
+        // window.ReactNativeWebView.postMessage(e);
         App.deviceId = null;
         toStart == 1 && App.init();
       }
@@ -200,13 +200,4 @@ $(function () {
     Handler._checkingCode = false;
     Handler.changeButtonText();
   });
-
-  (async () => {
-    try {
-      const devices = await Quagga.CameraAccess.enumerateVideoDevices();
-      alert(JSON.stringify(devices));
-    } catch (e) {
-      alert(JSON.stringify(e));
-    }
-  })();
 });

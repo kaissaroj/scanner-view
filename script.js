@@ -1,6 +1,14 @@
 /**Quagga initialiser starts here*/
 
 $(function () {
+  (() => {
+    const queryString = window.location.search;
+    if (queryString == "?modal") {
+      var d = document.getElementsByTagName("video");
+      d[0].style.opacity = 1;
+    }
+  })();
+
   var App = {
     deviceId: null,
     init: function () {

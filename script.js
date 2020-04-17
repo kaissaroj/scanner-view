@@ -151,23 +151,13 @@ $(function () {
       }
     },
     getDeviceLists: async (toStart) => {
-      // try {
-      //   let devices = await navigator.mediaDevices.enumerateDevices();
-      //   const backDevice = devices.filter(
-      //     (device) => device.kind == "videoinput"
-      //   );
-      //   alert(JSON.stringify(devices));
-      //   Handler.deviceId = backDevice[backDevice.length - 1].deviceId;
-      //   App.deviceId = Handler.deviceId;
-      //   toStart == 1 && App.init();
-      // } catch (e) {
-      const d = "45E3F3EEFB460485B537E9E5E6F71400A5B46490";
-      alert(d);
-      App.deviceId = d;
+      let devices = await navigator.mediaDevices.enumerateDevices();
+      const backDevice = devices.filter(
+        (device) => device.kind == "videoinput"
+      );
+      Handler.deviceId = backDevice[backDevice.length - 1].deviceId;
+      App.deviceId = Handler.deviceId;
       toStart == 1 && App.init();
-      //   alert(JSON.stringify(e));
-      //   window.ReactNativeWebView.postMessage(e);
-      // }
     },
     codeReceived: (code) => {
       if (!Handler._checkingCode) {

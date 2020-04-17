@@ -200,4 +200,8 @@ $(function () {
     Handler._checkingCode = false;
     Handler.changeButtonText();
   });
+  if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+    alert("enumerateDevices() not supported.");
+    return;
+  }
 });

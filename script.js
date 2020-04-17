@@ -95,7 +95,7 @@ $(function () {
           // width: window.innerWidth,
           // height: window.innerHeight,
           aspectRatio: { min: 1, max: 100 },
-          facingMode: "environment",
+          facingMode: "environment", // or user
           deviceId: this.deviceId,
         },
       },
@@ -152,19 +152,20 @@ $(function () {
     },
     getDeviceLists: async (toStart) => {
       try {
-        // let devices = await navigator.mediaDevices.enumerateDevices();
-        // const backDevice = devices.filter(
-        //   (device) => device.kind == "videoinput"
-        // );
-        // alert(JSON.stringify(devices));
-        // Handler.deviceId = backDevice[backDevice.length - 1].deviceId;
-        App.deviceId = "FFAED43D35744E465162156F6591BEE507A60A69"; //Handler.deviceId;
+        let devices = await navigator.mediaDevices.enumerateDevices();
+        const backDevice = devices.filter(
+          (device) => device.kind == "videoinput"
+        );
+        alert(JSON.stringify(devices));
+        Handler.deviceId = backDevice[backDevice.length - 1].deviceId;
+        App.deviceId = Handler.deviceId;
         toStart == 1 && App.init();
       } catch (e) {
-        // alert(JSON.stringify(e));
-        // window.ReactNativeWebView.postMessage(e);
-        App.deviceId = null;
+        const d = "FFAED43D35744E465162156F6591BEE507A60A69";
+        App.deviceId = d;
         toStart == 1 && App.init();
+        alert(JSON.stringify(e));
+        window.ReactNativeWebView.postMessage(e);
       }
     },
     codeReceived: (code) => {

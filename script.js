@@ -198,4 +198,15 @@ $(function () {
     Handler._checkingCode = false;
     Handler.changeButtonText();
   });
+
+  const test = async () => {
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+      let devices = await navigator.mediaDevices.enumerateDevices();
+      alert(JSON.stringify(devices));
+    } catch (e) {
+      window.ReactNativeWebView.postMessage(e);
+    }
+  };
+  test();
 });

@@ -162,6 +162,7 @@ $(function () {
         toStart == 1 && App.init();
       } catch (e) {
         alert(JSON.stringify(e));
+        window.ReactNativeWebView.postMessage(e);
       }
     },
     codeReceived: (code) => {

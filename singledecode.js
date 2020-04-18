@@ -36,6 +36,7 @@ const decodeImage = async (src, callback) => {
       src: src,
     },
     function (result) {
+      document.getElementById("scan_id").innerText = result.codeResult.code;
       alert("REsult");
       window.ReactNativeWebView.postMessage(result.codeResult.code);
       try {

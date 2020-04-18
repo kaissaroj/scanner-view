@@ -1,4 +1,5 @@
 const decodeImage = async (src, callback) => {
+  alert(src);
   await Quagga.decodeSingle(
     {
       size: 800,
@@ -36,6 +37,7 @@ const decodeImage = async (src, callback) => {
     },
     function (result) {
       alert("REsult");
+      window.ReactNativeWebView.postMessage(result.codeResult.code);
       try {
         callback(result.codeResult.code);
       } catch (e) {
@@ -46,7 +48,6 @@ const decodeImage = async (src, callback) => {
   );
 };
 document.addEventListener("message", function (event) {
-  alert(event.data);
   try {
     decodeImage(event.data, function (code) {
       alert(code);

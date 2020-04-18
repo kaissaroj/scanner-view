@@ -1,5 +1,4 @@
-const decodeImage = async (src, callback) => {
-  alert(src);
+const decodeImage = async (src) => {
   await Quagga.decodeSingle(
     {
       size: 800,
@@ -36,28 +35,17 @@ const decodeImage = async (src, callback) => {
       src: src,
     },
     function (result) {
-      document.getElementById("scan_id").innerText = result.codeResult.code;
-      alert("REsult");
-      window.ReactNativeWebView.postMessage(result.codeResult.code);
+      let code = null;
       try {
-        callback(result.codeResult.code);
-      } catch (e) {
-        alert("error");
-        callback(null);
-      }
+        code = result.codeResult.code;
+      } catch (e) {}
+      window.ReactNativeWebView.postMessage(code);
     }
   );
 };
 document.addEventListener("message", function (event) {
   try {
-    decodeImage(event.data, function (code) {
-      alert(code);
-      try {
-        window.ReactNativeWebView.postMessage(code);
-      } catch (e) {
-        alert("Error");
-      }
-    });
+    decodeImage(event.data);
   } catch (e) {
     alert("Error");
   }

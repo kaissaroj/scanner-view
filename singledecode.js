@@ -43,9 +43,9 @@ const decodeImage = (src, callback) => {
     }
   );
 };
-document.addEventListener("message", function (data) {
-  alert(data);
-  decodeImage(data, (code) => {
+document.addEventListener("message", function (event) {
+  alert(event.data);
+  decodeImage(event.data, (code) => {
     alert(code);
     try {
       window.ReactNativeWebView.postMessage(code);

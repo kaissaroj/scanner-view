@@ -35,14 +35,22 @@ const decodeImage = (src, callback) => {
       src: src,
     },
     function (result) {
-      callback(!!result.codeResult ? result.codeResult.code : null);
+      try {
+        callback(result.codeResult.code);
+      } catch (e) {
+        callback(null);
+      }
     }
   );
 };
-document.addEventListener("message", function (event) {
-  alert(event.data);
-  decodeImage(event.data, (code) => {
+document.addEventListener("message", function (data) {
+  alert(data);
+  decodeImage(data, (code) => {
     alert(code);
-    window.ReactNativeWebView.postMessage(code);
+    try {
+      window.ReactNativeWebView.postMessage(code);
+    } catch (e) {
+      alert("Error");
+    }
   });
 });

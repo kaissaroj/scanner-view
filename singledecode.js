@@ -1,10 +1,11 @@
+
 const decodeImage = async (src, type, callback) => {
 
   const reader = type == 'ean-extended' ? [
     {
       format: "ean_reader",
       config: {
-        supplements: ["ean_5_reader"]
+        supplements: ['ean_5_reader']
       }
     }
   ] : 
@@ -13,23 +14,20 @@ const decodeImage = async (src, type, callback) => {
     "code_128_reader",
   ];
 
+
   await Quagga.decodeSingle(
     {
-      size: 800,
-      locator: {
-        patchSize: "large",
-        halfSample: true,
-      },
-      numOfWorkers: 4,
-      decoder: {reader
-      },
-      locate: true,
-      multiple: true,
-      readers: reader,
-      locate: true,
+      inputStream: {size:1280},
+      locator: {patchSize:"medium",halfSample:true},
+      numOfWorkers:8,
+      decoder: {
+        readers:reader
+      },  
+      locate:true,
       src: src,
     },
     function (result) {
+      console.log(result)
       let code = null;
       try {
         code = result.codeResult.code;

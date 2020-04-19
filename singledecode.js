@@ -1,4 +1,18 @@
-const decodeImage = async (src) => {
+const decodeImage = async (src, type, callback) => {
+
+  const reader = type == 'ean-extended' ? [
+    {
+      format: "ean_reader",
+      config: {
+        supplements: ["ean_5_reader"]
+      }
+    }
+  ] : 
+  [
+    "upc_reader",
+    "code_128_reader",
+  ];
+
   await Quagga.decodeSingle(
     {
       size: 800,
@@ -7,30 +21,11 @@ const decodeImage = async (src) => {
         halfSample: true,
       },
       numOfWorkers: 4,
-      decoder: {
-        readers: [
-          {
-            format: "ean_reader",
-            config: {
-              supplements: ["ean_5_reader"],
-            },
-          },
-          "upc_reader",
-          "code_128_reader",
-        ],
+      decoder: {reader
       },
       locate: true,
       multiple: true,
-      readers: [
-        {
-          format: "ean_reader",
-          config: {
-            supplements: ["ean_5_reader"],
-          },
-        },
-        "upc_reader",
-        "code_128_reader",
-      ],
+      readers: reader,
       locate: true,
       src: src,
     },
@@ -39,13 +34,19 @@ const decodeImage = async (src) => {
       try {
         code = result.codeResult.code;
       } catch (e) {}
-      window.ReactNativeWebView.postMessage(code);
+      callback(code);
+     
     }
   );
 };
 document.addEventListener("message", function (event) {
   try {
-    decodeImage(event.data);
+    decodeImage(event.data,'ean-extended', (code) => {
+      !!code && window.ReactNativeWebView.postMessage(code);
+      !code && decodeImage(event.data,'normal', (code) => {
+        window.ReactNativeWebView.postMessage(code);
+      })
+    });
   } catch (e) {
     alert("Error");
   }

@@ -29,10 +29,11 @@ $(function () {
         src: src,
       },
       function (result) {
-        alert('code find')
+      
         let code = null;
         try {
           code = result.codeResult.code;
+          alert(code)
         } catch (e) {}
         callback(code);
        
@@ -41,7 +42,7 @@ $(function () {
   };
   document.addEventListener("message", function (event) {
     try {
-      alert('web listen1');
+      
       decodeImage(event.data,'ean-extended', (code) => {
         !!code && window.ReactNativeWebView.postMessage(code);
         !code && decodeImage(event.data,'normal', (code) => {
@@ -55,34 +56,7 @@ $(function () {
   
   window.addEventListener("message", function(event) {
     try {
-      alert('web listen2');
-      decodeImage(event.data,'ean-extended', (code) => {
-        !!code && window.ReactNativeWebView.postMessage(code);
-        !code && decodeImage(event.data,'normal', (code) => {
-          window.ReactNativeWebView.postMessage(code);
-        })
-      });
-    } catch (e) {
-      alert("Error");
-    }
-  });
-  this.document.addEventListener("message", function (event) {
-    try {
-      alert('web listen3');
-      decodeImage(event.data,'ean-extended', (code) => {
-        !!code && window.ReactNativeWebView.postMessage(code);
-        !code && decodeImage(event.data,'normal', (code) => {
-          window.ReactNativeWebView.postMessage(code);
-        })
-      });
-    } catch (e) {
-      alert("Error");
-    }
-  });
-  
-  this.window.addEventListener("message", function(event) {
-    try {
-      alert('web listen4');
+     
       decodeImage(event.data,'ean-extended', (code) => {
         !!code && window.ReactNativeWebView.postMessage(code);
         !code && decodeImage(event.data,'normal', (code) => {

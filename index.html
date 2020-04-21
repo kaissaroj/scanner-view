@@ -1,85 +1,32 @@
-<!DOCTYPE html>
-<meta name="robots" content="noindex" />
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Scanner</title>
-    <script src="./jquery.min.js"></script>
-    <script src="./quagga.min.js"></script>
-  </head>
-  <style>
-    body {
-      overflow-y: hidden;
-      overflow-x: hidden;
-      margin: 0px;
-    }
-    video {
-      /* opacity: 0.2; */
-    }
-    button {
-      width: 100%;
-      color: white;
-      background-color: blueviolet;
-      height: 55px !important;
-      font-size: 18px;
-      font-weight: bold;
-      opacity: 0.5;
-    }
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BarCode Scanner</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="images/hello-icon-152.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="white"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="BarCode Scanner">
+  <meta name="msapplication-TileImage" content="images/hello-icon-144.png">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <script src="scripts/quagga.min.js"></script>
+</head>
+<body class="fullscreen">
+  <section id="container" class="container">
+    <div id="interactive" class="viewport">
+      <video playsinline autoplay></video>
+    </div>
+    <div class="controls">
+      <!-- <button id="scan_btn">SCAN BARCODE</button> -->
+      <p id="found_code"></p>
+    </div>
+  </section>
 
-    #interactive.viewport {
-      position: relative;
-    }
-
-    #interactive.viewport > canvas,
-    #interactive.viewport > video {
-      max-width: 100%;
-      width: 100%;
-    }
-
-    @media (max-width: 603px) {
-      /* line 2, ../sass/phone/_core.scss */
-      #container {
-        /* margin: 10px auto; */
-        -moz-box-shadow: none;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-      }
-    }
-    @media (max-width: 603px) {
-      /* line 5, ../sass/phone/_viewport.scss */
-      #interactive.viewport {
-        width: 100%;
-        height: auto;
-        overflow: hidden;
-      }
-    }
-    .controls {
-      position: absolute;
-      top: -2px;
-      width: 100%;
-    }
-    #found_code {
-      font-size: 8px;
-      float: right;
-      padding: 5px;
-    }
-    video {
-      /* height: 220vw; */
-      object-fit: cover;
-    }
-  </style>
-  <body>
-    <section id="container" class="container">
-      <div id="interactive" class="viewport">
-        <video playsinline autoplay></video>
-      </div>
-      <div class="controls">
-        <button id="scan_btn">SCAN BARCODE</button>
-        <p id="found_code"></p>
-      </div>
-    </section>
-
-    <script src="./script3.js"></script>
-  </body>
+  <script src="scripts/script3.js"></script>
+</body>
 </html>

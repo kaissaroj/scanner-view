@@ -52,7 +52,7 @@ $(function () {
     }
   });
   
-  windows.addEventListener("message", function(event) {
+  window.addEventListener("message", function(event) {
     try {
       alert(!!event.data);
       decodeImage(event.data,'ean-extended', (code) => {

@@ -187,12 +187,8 @@ $(function () {
       App.init();
     });
     function sendData(code){
-        
       const url = `exp://192.168.43.25:19000/--/${code}`;
-    var confirmed = confirm('Find !!');
-    if(confirmed){
-        window.location.href = url;
-    }
+      window.open(url,"_self");
     }
     
   

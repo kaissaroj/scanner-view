@@ -37,29 +37,20 @@ const decodeImage = async (src, type, callback) => {
     }
   );
 };
-document.addEventListener("message", function (event) {
-  try {
-    alert(!!event.data);
-    decodeImage(event.data,'ean-extended', (code) => {
-      !!code && window.ReactNativeWebView.postMessage(code);
-      !code && decodeImage(event.data,'normal', (code) => {
-        window.ReactNativeWebView.postMessage(code);
-      })
-    });
-  } catch (e) {
-    alert("Error");
-  }
-});
+// document.addEventListener("message", function (event) {
+//   try {
+//     alert(!!event.data);
+//     decodeImage(event.data,'ean-extended', (code) => {
+//       !!code && window.ReactNativeWebView.postMessage(code);
+//       !code && decodeImage(event.data,'normal', (code) => {
+//         window.ReactNativeWebView.postMessage(code);
+//       })
+//     });
+//   } catch (e) {
+//     alert("Error");
+//   }
+// });
 windows.addEventListener("message", function(event) {
-  try {
-    alert(!!event.data);
-    decodeImage(event.data,'ean-extended', (code) => {
-      !!code && window.ReactNativeWebView.postMessage(code);
-      !code && decodeImage(event.data,'normal', (code) => {
-        window.ReactNativeWebView.postMessage(code);
-      })
-    });
-  } catch (e) {
-    alert("Error");
-  }
+  alert("This is a Entry Point Working in iOS");
+  init(event.data)
 });

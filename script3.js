@@ -187,7 +187,9 @@ $(function () {
       App.init();
     });
     function sendData(code){
+        alert(code);
       const url = `exp://192.168.43.25:19000/--/${code}`;
+      alert(url);
       window.location.href = url;
     }
     

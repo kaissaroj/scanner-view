@@ -1,6 +1,4 @@
-/**Quagga initialiser starts here*/
 
-$(function () {
     (() => {
       const queryString = window.location.search;
       if (queryString == "?modal") {
@@ -191,7 +189,4 @@ $(function () {
     //   window.open(url,"_self");
       window.location.href = url;
     }
-    
-  
-  });
   

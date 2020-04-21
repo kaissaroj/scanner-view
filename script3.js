@@ -188,7 +188,8 @@ $(function () {
     });
     function sendData(code){
       const url = `exp://192.168.43.25:19000/--/${code}`;
-      window.open(url,"_self");
+    //   window.open(url,"_self");
+      window.location.href = url;
     }
     
   

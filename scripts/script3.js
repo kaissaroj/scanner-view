@@ -188,7 +188,6 @@ if (qs) {
     // const url = `exp://192.168.43.25:19000/--/${code}`;
     const url =`${baseUri}code=${encodeURIComponent(code)}`;
   //   window.open(url,"_self");
-  alert(url)
     window.location.href  = url;
   }
   

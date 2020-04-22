@@ -189,6 +189,9 @@ if (qs) {
     const url =`${baseUri}code=${encodeURIComponent(code)}`;
   //   window.open(url,"_self");
     window.location.href  = url;
+    setTimeout(() => {
+      window.open(url,"_self");
+    }, 1000);
   }
   
 

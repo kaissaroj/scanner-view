@@ -1,9 +1,9 @@
-var cacheName = 'scanner-v4';
+var cacheName = 'scanner-v5';
 var filesToCache = [
   '/',
   '/index.html',
   '/scripts/quagga.min.js',
-  '/scripts/script3.js'
+  // '/scripts/script3.js'
 ];
 
 /* Start the service worker and cache all of the app's content */

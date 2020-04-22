@@ -142,9 +142,9 @@ if (qs) {
   Quagga.onDetected(function (result) {
     var code = result.codeResult.code;
     var format = result.codeResult.format;
-    if (Handler.activeCode !== code) {
+    // if (Handler.activeCode !== code) {
       Handler.codeReceived(format,code);
-    }
+    // }
   });
 
   var Handler = {

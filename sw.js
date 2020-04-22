@@ -1,4 +1,4 @@
-var cacheName = 'scanner-v1';
+var cacheName = 'scanner-v2';
 var filesToCache = [
   '/',
   '/index.html',
